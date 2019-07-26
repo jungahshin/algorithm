@@ -7,7 +7,7 @@ int dx[4]={0,0,1,-1};
 int M,N,K;
 int arr[50][50]={0, };
 int visited[50][50]={0, };
- 
+
 void dfs(int x,int y){
     
     for(int i=0;i<4;i++){
@@ -31,14 +31,14 @@ int main(){
         scanf("%d %d %d",&M,&N,&K);
         
         int ans=0; //지렁이 개수
-        
+
         for(int i=0;i<K;i++){
             scanf("%d %d",&x,&y);
             arr[x][y]=1;
         }
         
-        for(int i=0;i<M;i++)
-            for(int j=0;j<N;j++)
+        for(int i=0;i<M;i++){
+            for(int j=0;j<N;j++){
                 if(arr[i][j] && !visited[i][j]){
                     
                     ans++;
@@ -46,8 +46,19 @@ int main(){
                     dfs(i,j);
                     
                 }
-        
+            }
+        }
+
+        // int *ans_final= new int[T];
+        // ans_final[testCase] = ans;
         cout<<ans<<endl;
+
+        // if(testCase == T-1){
+        //     for(int testCase=0;testCase<T;testCase++){
+        //         cout<<ans_final[testCase]<<endl;
+        //     }
+        //     delete [] ans_final;
+        // }
     }
     return 0;
 }
