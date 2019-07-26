@@ -5,8 +5,8 @@ using namespace std;
 int dy[4]={1,-1,0,0};
 int dx[4]={0,0,1,-1};
 int M,N,K;
-int arr[50][50]={0};
-int visited[50][50]={0};
+int arr[50][50]={0, };
+int visited[50][50]={0, };
  
 void dfs(int x,int y){
     
@@ -29,9 +29,6 @@ int main(){
     
     for(int testCase=0;testCase<T;testCase++){
         scanf("%d %d %d",&M,&N,&K);
-        
-        memset(arr,0,sizeof(arr));
-        memset(visited,0,sizeof(visited));
         
         int ans=0; //지렁이 개수
         
