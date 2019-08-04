@@ -1,6 +1,8 @@
+//이 문제는 인접 리스트가 훨씬 쉽다...
 #include <iostream>
+#include <stdio.h>
 using namespace std;
-//#include <stdio.h>
+
 int input[1001][1001]={0, };
 int visited[1001][1001]={0, };
 int connected_component = 0;
@@ -35,8 +37,8 @@ int main(){
                 if(input[i][j] && !visited[i][j]){
                     visited[i][j] = 1;
                     visited[j][i] = 1;
-                    connected_component++;
                     dfs(i,j);
+                    connected_component++;
                 }
             }
         }
