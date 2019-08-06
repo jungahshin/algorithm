@@ -1,4 +1,5 @@
 //이 문제는 인접 리스트가 훨씬 쉽다...
+//11724-3이 제일 소요 시간 적었음!!
 #include <iostream>
 #include <stdio.h>
 #include <vector>
@@ -22,15 +23,15 @@ void dfs(int y){
 }
 
 int main(){
-    //scanf("%d %d", &a, &b);//a-정점, b-간선
+
     cin>>a>>b;
-    
+
     if(a<1 || a>1000 || b<0 || b>a*(a-1)/2){
         return 0;
     }
 
     for(int i=1; i<=b; i++){//간선의 개수 b만큼 입력을 받는다
-    //scanf("%d %d", &m, &n);//연결된 두 정점 m과 n
+
         cin>>m>>n;
 
         if(m<1 || n>a){
