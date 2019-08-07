@@ -2,10 +2,11 @@
 #include <vector>
 #include <queue>
 using namespace std;
+#define MAX 9
 
-queue<pair<int, int>> q;
-int copy_input[9][9] = {0, };
-int input[9][9] = {0, };
+vector<pair<int, int> > v;
+int copy_input[MAX][MAX];
+int input[MAX][MAX];
 int n,m,num;
 int safe = 0;
 int dx[4]={0,0,1,-1};//상, 하, 우, 좌 
@@ -22,7 +23,7 @@ int dy[4]={1,-1,0,0};
 //그리고 입력받을 때 바이러스가 있는 곳도 입력을 받아서 queue<pair<int, int>>형태로... 나중에 그 지점을 차례대로 dfs돌기
 
 //연구소 복사하기
-void copy(int (*a)[9], int (*b)[9]){//앞의 인자는 복사 연구소, 뒤의 인자는 원본 연구소
+void copy(int (*a)[MAX], int (*b)[MAX]){//앞의 인자는 복사 연구소, 뒤의 인자는 원본 연구소
     for(int i=1; i<=n; i++){
         for(int j=1; j<=m; j++){
             a[i][j] = b[i][j];
@@ -33,8 +34,14 @@ void copy(int (*a)[9], int (*b)[9]){//앞의 인자는 복사 연구소, 뒤의 
 //바이러스 퍼뜨리기-->바이러스를 퍼뜨리기 위한 복사 연구소가 하나 더 필요하다!
 //copy_input은 벽을 세우기 위한 복사 연구소인데 이것에 바이러스를 퍼뜨리면 벽을 세우기 위한 여러 경우의 수를 만들지 못한다.
 void spread(){
-    int virus_input[9][9] = {0, };
+    int virus_input[MAX][MAX];
     copy(virus_input, copy_input);
+    
+    //초기 바이러스를 큐에 넣어준다.(큐 세팅)
+    queue<pair<int, int> > q;
+    for(int i=0; i<v.size(); i++){
+        q.push(v[i]);
+    }
 
     while(!q.empty()){//큐에 무언가가 들어있으면 반복
         int x =q.front().first;
@@ -83,7 +90,6 @@ void wall(int num){
                 copy_input[i][j] = 1;//벽 세우기
                 wall(num+1);
                 copy_input[i][j] = 0;//복사 연구소 벽세운거 다시 초기화
-                //zero.push_back();
             }
         }
     }  
@@ -91,6 +97,9 @@ void wall(int num){
 }
 
 int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
+
     cin>>n>>m;//연구소의 크기 n*m을 입력받는다.
     if(n<3 || m>8){//n과m의 조건
         return 0;
@@ -98,8 +107,8 @@ int main(){
     for(int i=1; i<=n; i++){
         for(int j=1; j<=m; j++){
             cin>>input[i][j];//띄어쓰기?
-            if(input[i][j] == 2){//바이러스 큐에 저장하기
-                q.push(make_pair(i, j));
+            if(input[i][j] == 2){
+                v.push_back(make_pair(i, j));//초기 바이러스는 반드시 vector에 넣어준다. 그래야 계속 바이러스 계산을 할 수 있다.
             }
         }
         //cin>>endl; 엔터 해줘야 하나?

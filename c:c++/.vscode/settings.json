@@ -3,6 +3,7 @@
         "__split_buffer": "cpp",
         "string": "cpp",
         "vector": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "queue": "cpp"
     }
 }
