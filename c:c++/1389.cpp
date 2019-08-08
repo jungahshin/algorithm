@@ -13,7 +13,7 @@ int t = 0;
 vector<int> final_v;
 vector<int> v;
 
-void bfs(int top, int x, int y){
+void dfs(int top, int x, int y){
     // for(int i=0; i<4; i++){
     //     int final_x = x+dx[i];
     //     int final_y = y+dy[i];
@@ -23,8 +23,6 @@ void bfs(int top, int x, int y){
     //         }
     //     }
     // }
-    queue<int> q;
-    q.
     for(int i=1; i<=n; i++){
         if(!visited[top][i] && input[y][i] && (top != i)){
             visited[top][i] = 1;
