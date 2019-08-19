@@ -59,15 +59,6 @@ int main(){
             }
             cout<<num<<"\n";
         }
-        // string i_string = to_string(i);
-        // eight.push_back(i_string);
-        // for(int j=0; j<eight.size(); j++){
-        //     cout<<eight[j]<<"\n";
-            // if(eight[j] == '8'){
-            //     num++;
-            // }
-        // }
-        // eight.clear();
     }
     cout<<num<<"\n";
 }
