@@ -13,33 +13,27 @@ int n,m,x,a;
 int num = 0;
 int sum = 0;
 
-vector<string> split(string str, char delimiter) {
-    vector<string> internal;
-    stringstream ss(str);
-    string temp;
-    while (getline(ss, temp, delimiter)) {
-        internal.push_back(temp);
-    }
-    return internal;
-}
-
 void dfs(int first, string str){
     if(num == n){
-        vector<string> final_split = split(str, " ");
+        vector<string> final_split;
+        istringstream iss(str);
+        for(string str; iss >> str;)
+            final_split.push_back(str);
 
+        int sum = 0;
         for(int j=0; j<final_split.size(); j++){
             sum += stoi(final_split[j]);
         }
         if(sum < x){
             final.push_back(str);
         }
-        // final_split.clear();
     }else{
         for(int i = first+1; i<m; i++){
-            num++;
-            dfs(i, to_string(list[i])+" ");
+            num += 1;
+            dfs(i, str+to_string(list[i])+" ");
         }
     }
+    num -= 1;
 }
 
 int main(){
