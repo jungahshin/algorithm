@@ -69,7 +69,6 @@ void go(int num, int n, int w){//시계방향으로 돌아감-->변경된 값을
 	}
 	v.clear();
 	v_du.clear();
-	//큐도 clear??
 }
 
 void go_back(int num, int n, int w){//반시계방향으로 돌아감-->변경된 값을 그대로 name_list에 넣는 식으로
@@ -132,7 +131,6 @@ void go_back(int num, int n, int w){//반시계방향으로 돌아감-->변경�
 
 
 void determine(int n,int w){//판별하기
-	// if(n%2 != 0){//홀수 --> 굳이 홀수/짝수 구분을 해야할까??
 		for(int i=n-1; i>=0; i-=2){
 			if(i>0 && w>0){//양수(테두리 시계방향)
 				num++;
