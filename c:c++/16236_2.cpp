@@ -95,11 +95,6 @@ int eat_fish(int size){//물고기 잡아먹기
             cout<<"shortest_j 정렬 후"<<get<0>(shortest_j[i])<<" "<<get<1>(shortest_j[i])<<" "<<get<2>(shortest_j[i])<<"\n";
         }
 
-        // sort(shortest.begin(), shortest.end());//i
-        // sort(shortest.begin(), shortest.end(), sortbysec);//j
-
-        // cout<<get<0>(shortest[0])<<"/"<<get<1>(shortest[0])<<"/"<<get<2>(shortest[0])<<"\n";
-
         //가장 맨 앞에 있는 있는 것을 먹는다
         //아기상어 원래 위치에 0값 넣기
         area[baby_shark[0].first][baby_shark[0].second] = 0;
@@ -128,12 +123,6 @@ int eat_fish(int size){//물고기 잡아먹기
         cout<<"time"<<time<<"\n";
 
     }
-    // else{//더 이상 먹을 수 있는 물고기가 없을 때
-    //     for(int i=0; i<time_final.size(); i++){
-    //         final += time_final[i];
-    //     }
-    // }
-    // cout<<can_eat.size()<<"\n";
 
     //아기상어가 먹은 물고기의 수(eat_num)가 아기상어의 크기와 같게 되면 아기 상어 크기 size+1, eat_num = 0초기화
     if(eat_num == size){
@@ -151,7 +140,6 @@ int eat_fish(int size){//물고기 잡아먹기
             }
         }
     }
-    // cout<<"size"<<size<<"\n";
 
     can_eat.clear();
     shortest.clear();
@@ -178,14 +166,6 @@ int main(){
     }
 
     shark_size.push_back(size);
-    // for(int i=0; i<n; i++){
-    //     for(int j=0; j<n; j++){
-    //         cout<<area[i][j]<<" ";
-    //     }
-    //     cout<<"\n";
-    // }
-
-    // cout<<num<<"\n";
 
     while(num>0){//먹을 수 있는 물고기가 하나라도 있으면 계속 eat_fish함수 진행
         num = eat_fish(shark_size[shark_size.size()-1]);
