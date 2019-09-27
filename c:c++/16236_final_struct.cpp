@@ -109,7 +109,6 @@ void eat_fish(){//물고기 잡아먹기
             //shortest time순으로 정렬하고, i, j순으로 정렬(다 오름차순)
             sort(shortest.begin(), shortest.end(), sortbyth);//time
 
-            // shortest_i.push_back(make_tuple(get<0>(shortest[0]), get<1>(shortest[0]), get<2>(shortest[0])));
             for(int i=0; i<shortest.size(); i++){//time 같으면
                 if(get<2>(shortest[0]) == get<2>(shortest[i])){
                     shortest_i.push_back(make_tuple(get<0>(shortest[i]), get<1>(shortest[i]), get<2>(shortest[i])));
@@ -118,7 +117,6 @@ void eat_fish(){//물고기 잡아먹기
 
             sort(shortest_i.begin(), shortest_i.end());//i
 
-            // shortest_j.push_back(make_tuple(get<0>(shortest_i[0]), get<1>(shortest_i[0]), get<2>(shortest_i[0])));
             for(int i=0; i<shortest_i.size(); i++){//i 같으면
                 if(get<0>(shortest_i[0]) == get<0>(shortest_i[i])){
                     shortest_j.push_back(make_tuple(get<0>(shortest_i[i]), get<1>(shortest_i[i]), get<2>(shortest_i[i])));
