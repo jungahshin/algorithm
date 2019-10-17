@@ -7,7 +7,6 @@ using namespace std;
 int a[301][301] = {0, };
 int a_check[301][301] = {0, };
 vector<pair<int, int>> v;
-// vector<pair<int, int>> v_check;//두 덩이인지 확인할때
 int dx[4] = {0, 0, -1, 1};
 int dy[4] = {1, -1, 0, 0};
 int final = 0;//년수 세기
@@ -77,7 +76,6 @@ bool check(){
 void go(){
     while(all()){//모두 0이 아니면 계속 진행
         //녹는 과정
-        // copy();
         final++;
         int a_copy[301][301] = {0, };
         for(int i=0; i<v.size(); i++){//빙산의 일부인 애들 계산
@@ -114,13 +112,6 @@ void go(){
                 }
             }
         }
-        // for(int i=0; i<n; i++){
-        //     for(int j=0; j<m; j++){
-        //         cout<<a[i][j]<<" ";
-        //     }
-        //     cout<<"\n";
-        // }
-        
         //두 덩이 check
         if(check()){
             two = true;
