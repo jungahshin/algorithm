@@ -47,9 +47,6 @@ void go(){
                 }
                 col = max(col,temp);//a배열의 행이 가장 큰 것을 기준으로 바뀐다.
             }
-            // for(int i=0; i<r; i++){
-            //     v[i].clear();
-            // }
         }else{//C연산 수행(열 단위로)
             for(int i=0; i<col; i++){
                 int num[101] = {0, };//행마다 등장 횟수 세기
@@ -81,9 +78,6 @@ void go(){
                 }
                 row = max(row,temp);//a배열의 행이 가장 큰 것을 기준으로 바뀐다.
             }
-            // for(int i=0; i<c; i++){
-            //     v[i].clear();
-            // }  
         }
     }
 }
