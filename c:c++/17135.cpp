@@ -1,132 +1,119 @@
 //캐슬디펜스
 #include <iostream>
 #include <vector>
-#include <queue>
-#include <cstdlib>
-#include <cmath>
 #include <algorithm>
+#include <cmath>
+#include <cstdlib>
 using namespace std;
 
-int a[16][16] = {0, };//행은 성을 위해 한 줄 더
-int a_copy[16][16] = {0, };
-int a_copy_1[16][16] = {0, };
-vector<pair<int, int>> army;//적의 위치-->턴마다 업데이트 되어야 해
-vector<pair<int, int>> army_copy;
-vector<pair<int, int>> palace;
-vector<pair<int, int>> bts;//궁수의 위치(3개)
-vector<pair<int, int>> death;
-vector<pair<int, int>> location;
-bool visited[16];
-int final = 0;
+int a[20][20] = {0, };
+int a_copy[20][20] = {0, };
+int a_temp[20][20] = {0, };
+int visited[20] = {0, };
+vector<pair<int, int>> v;//궁수들 위치 저장
 int n, m, d;
+int final = 0;
 
-void copy(){
+bool check(){//적이 남아있는지 확인
+    bool attack = false;
     for(int i=0; i<n; i++){
         for(int j=0; j<m; j++){
-            a_copy[i][j] = a[i][j];
-        }
-    }
-}
-
-void copy_army(){
-    for(int i=0; i<army.size(); i++){
-        army_copy.push_back(make_pair(army[i].first, army[i].second));
-    }
-}
-
-bool check(){
-    bool temp = true;
-    for(int i=0; i<n; i++){
-        for(int j=0; j<m; j++){
-            if(a_copy[i][j] != 0){
-                temp = false;
+            if(a_temp[i][j] == 1){
+                attack = true;
             }
         }
     }
-    return temp;
+    return attack;
 }
 
-void attack(){
+void copy(){//a를 새로운 곳에 복사하고 그것으로 게임 진행 a->a_temp
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            a_temp[i][j] = a[i][j];
+        }
+    }
+}
+
+int play(){//본격적인 게임 시작!
+    int kill_num = 0;
+    int really_temp = 0;
     copy();
-    copy_army();
-    int kill = 0;
-    while(!check()){//1의 값이 하나라도 있으면 계속 진행
-        for(int i=0; i<bts.size(); i++){
-            for(int j=0; j<army_copy.size(); j++){
-                if(abs(bts[i].first - army_copy[j].first)+abs(bts[i].second-army_copy[j].second) <= d){
-                    //거리와 열의 위치 넣어주기(death)
-                    death.push_back(make_pair(abs(bts[i].first - army_copy[j].first)+abs(bts[i].second-army_copy[j].second), army_copy[j].second));
-                    //행과 열 넣어주기(location)
-                    location.push_back(make_pair(army_copy[j].first, army_copy[j].second));
-                }
-            }
-            if(death.size() != 0){
-                sort(death.begin(), death.end());
-                //death[0].second-->열의 위치
-                sort(location.begin(), location.end());
-                //가장 끝에서 부터 열이 같은 location을 찾으면 break;
-                for(int i=location.size()-1; i>=0; i--){
-                    if(location[i].second == death[0].second){
-                        if(a_copy[location[i].first][location[i].second] != 0){
-                            a_copy[location[i].first][location[i].second] = 0;
-                            kill += 1;
-                            break;
+    while(check()){//적이 아직 남아있으면 게임 계속 진행
+        really_temp++;
+        vector<pair<int, int>> kill;//적의 위치를 저장했다가 한 턴마다 죽인다.
+        kill.clear();
+        for(int i=0; i<v.size(); i++){//각 궁수들 마다 진행
+            vector<pair<int, pair<int, int>>> temp;//거리가 d이하인 적수들 모두 저장
+            temp.clear();
+            for(int j=0; j<n; j++){
+                for(int h=0; h<m; h++){
+                    if(a_temp[j][h] == 1){//적수가 있으면
+                        if(abs(v[i].first-j)+ abs(v[i].second-h) <= d){//거리가 d이하이면-->temp에 저장
+                            temp.push_back(make_pair(abs(v[i].first-j)+ abs(v[i].second-h), make_pair(h, j)));//거리, 위치(열, 행)-->열이 우선!!!
                         }
                     }
                 }
             }
-            death.clear();
-            location.clear();
+            //가장 거리가 짧고, 가장 왼쪽에 있는 적을 죽인다.
+            sort(temp.begin(), temp.end());
+            if(temp.size() > 0){
+                kill.push_back(make_pair(temp[0].second.second, temp[0].second.first));
+            }
         }
-        //a_copy값들 다 바꾸기(이동)
-        for(int i=0; i<n-1; i++){
+        if(kill.size() > 0){
+            for(int i=0; i<kill.size(); i++){//적을 죽인다.
+                if(a_temp[kill[i].first][kill[i].second] == 1){
+                    a_temp[kill[i].first][kill[i].second] = 0;
+                    kill_num++;
+                }
+            }            
+        }
+        //적들이 행+1 이동한다.
+        for(int i=0; i<=n-2; i++){
             for(int j=0; j<m; j++){
-                a_copy_1[i+1][j] = a_copy[i][j];
+                a_copy[i+1][j] = a_temp[i][j];
             }
         }
         for(int j=0; j<m; j++){
-            a_copy_1[0][j] = 0;
+            a_copy[0][j] = 0;
         }
+        //a_copy를 a로 다 옮긴다.
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
-                a_copy[i][j] = a_copy_1[i][j];
-            }
-        }
-        army_copy.clear();
-        //새로운 적군의 위치 army에 넣기 (a_copy에 1로 남아있는 애들 넣어주기)
-        for(int i=0; i<n; i++){
-            for(int j=0; j<m; j++){
-                if(a_copy[i][j] == 1){//적군으로 남아있음
-                    army_copy.push_back(make_pair(i, j));
-                }
+                a_temp[i][j] = a_copy[i][j];
             }
         }
     }
-    army_copy.clear();
-    final = max(final, kill);
+    return kill_num;
 }
 
 void put(){
-    for(int i=0; i<palace.size(); i++){
-        if(visited[i] == true){
-            bts.push_back(make_pair(palace[i].first, palace[i].second));
+    for(int i=0; i<m; i++){//미리 0으로 초기화
+        a[n][i] = 0;
+    }
+    v.clear();
+    for(int i=0; i<m; i++){
+        if(visited[i] == 1){
+            a[n][i] = 1;
+            v.push_back(make_pair(n, i));
         }
     }
-    attack();
-    bts.clear();
+    //최대값 계산
+    final = max(final, play());
 }
 
-void choose(int idx, int num){
+void combin(int idx, int num){//조합 진행(3명)
     if(num == 3){
         put();
         return;
     }
-    for(int i=idx; i<palace.size(); i++){
-        if(visited[i] == true) continue;
-        visited[i] = true;
 
-        choose(i, num+1);
-        visited[i] = false;
+    for(int i=idx; i<m; i++){//열 기준
+        if(visited[i] == 1) continue;
+        visited[i] = 1;
+
+        combin(i, num+1);
+        visited[i] = 0;
     }
 }
 
@@ -135,16 +122,8 @@ int main(){
     for(int i=0; i<n; i++){
         for(int j=0; j<m; j++){
             cin>>a[i][j];
-            if(a[i][j] == 1){
-                army.push_back(make_pair(i, j));
-            }
         }
     }
-    for(int i=0; i<m; i++){
-        palace.push_back(make_pair(n, i));//궁수가 있을 수 있는 위치 넣기
-    }
-    choose(0, 0);
-
+    combin(0, 0);
     cout<<final<<"\n";
-    return 0;
 }
