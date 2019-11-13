@@ -1,4 +1,4 @@
-//배열 돌리기4
+//배열 돌리기4(순열!!, 아이디어 좋음!)
 #include <iostream>
 #include <vector>
 #include <queue>
