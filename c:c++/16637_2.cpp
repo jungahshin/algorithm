@@ -56,7 +56,6 @@ int cal_2(vector<char> c){//temp, v에 들어 있는 값들 계산
 
 void go(){//계산하기
     v.clear();
-    string final;
     bool check = false;
     for(int i=0; i<=n; i++){
         char num = a[i];
@@ -65,17 +64,11 @@ void go(){//계산하기
                 int temp_2 = 0;
                 temp.clear();
                 check = true;
-                final += '(';
-                final += a[i];
                 temp.push_back(num);
-            }else{
-                final += '(';
             }
         }else if(bracket[i] == 2){//닫는 괄호 --> 벡터 안에 들어있는 값들을 계산해준다.
             if(i != n){
                 check= false;
-                final += ')';
-                final += a[i];
                 //v에 temp값들을 계산한 후의 값을 넣어준다.
                 v.push_back(to_string(cal_2(temp)));
                 //그리고 v에 a[i]값을 넣어준다.
@@ -83,13 +76,11 @@ void go(){//계산하기
                 str = num;
                 v.push_back(str);
             }else{
-                final += ')';
                 //v에 temp값들을 계산한 후의 값을 넣어준다.
                 v.push_back(to_string(cal_2(temp)));
             }
         }else{//괄호가 없어-->그냥 벡터에 넣어준다.
             if(i != n){
-                final += a[i];
                 if(check == true){//괄호 안의 값
                     temp.push_back(num);
                 }else{
