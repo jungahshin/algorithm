@@ -1,4 +1,4 @@
-//불(이것도 불이 번질 것 같은 곳에는 이동할 수 없다)
+//불(이것도 불이 번질 것 같은 곳에는 이동할 수 없다)-->bfs안에 bfs
 #include <iostream>
 #include <vector>
 #include <queue>
