@@ -13,15 +13,13 @@ int go(int x){
     if(num[x] != INT_MAX){
         return num[x];
     }else{
-        for(int i=0; i<3; i++){
-            if((x % 3) == 0){
-                num[x] = min(num[x], go(x/3)+1);
-            }
-            if((x % 2) == 0){//2번 연산
-                num[x] = min(num[x], go(x/2)+1);
-            }
-            num[x] = min(num[x], go(x-1)+1);
+        if((x % 3) == 0){
+            num[x] = min(num[x], go(x/3)+1);
         }
+        if((x % 2) == 0){//2번 연산
+            num[x] = min(num[x], go(x/2)+1);
+        }
+        num[x] = min(num[x], go(x-1)+1);
     }
     return num[x];
 }
