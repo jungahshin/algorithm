@@ -24,10 +24,10 @@ void go(int x, int y, int dir, char d[][51], int num){//중간점을 항상 기�
     q.push(make_pair(make_pair(x, y), make_pair(dir, num)));
     
     while(!q.empty()){
-        int a = q.front().first.first;
-        int b = q.front().first.second;
-        int c = q.front().second.first;
-        int h = q.front().second.second;
+        int a = q.front().first.first;//행
+        int b = q.front().first.second;//열
+        int c = q.front().second.first;//방향(가로, 세로)
+        int h = q.front().second.second;//이동 횟수
         q.pop();
 
         //도착 지점에 왔는지 확인하기
