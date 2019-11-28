@@ -19,7 +19,7 @@ int visited[51][51][2] = {0, };//중간점, 방향
 int final_dir = 0;
 int final_num = INT_MAX;
 
-void go(int x, int y, int dir, char d[][51], int num){//중간점을 항상 기준으로 생각한다. 큐에 있는 dir이 0이면-->(x, y-1),(x, y),(x, y+1), dir이 1이면 -->(x-1, y),(x, y),(x+1, y)
+void go(int x, int y, int dir, int num){//중간점을 항상 기준으로 생각한다. 큐에 있는 dir이 0이면-->(x, y-1),(x, y),(x, y+1), dir이 1이면 -->(x-1, y),(x, y),(x+1, y)
     queue<pair<pair<int, int>, pair<int, int>>> q;
     q.push(make_pair(make_pair(x, y), make_pair(dir, num)));
     
@@ -39,28 +39,28 @@ void go(int x, int y, int dir, char d[][51], int num){//중간점을 항상 기�
         if(c == 0){//행
             //U(상)-->x값들을 -1씩 한다.(x값들만 범위 내에 있는 지 체크)
             if(0 <= (a-1) && (a-1) < n){
-                if((d[a-1][b-1] == '0' || d[a-1][b-1] == 'E') && (d[a-1][b] == '0' || d[a-1][b] == 'E') && (d[a-1][b+1] == '0' || d[a-1][b+1] == 'E') && !visited[a-1][b][0]){//모두 빈칸이면 이동 가능!
+                if((save[a-1][b-1] == '0' || save[a-1][b-1] == 'E') && (save[a-1][b] == '0' || save[a-1][b] == 'E') && (save[a-1][b+1] == '0' || save[a-1][b+1] == 'E') && !visited[a-1][b][0]){//모두 빈칸이면 이동 가능!
                     visited[a-1][b][0] = 1;
                     q.push(make_pair(make_pair(a-1, b), make_pair(0, h+1)));
                 }
             }
             //D(하)-->x값들을 +1씩 한다.(x값들만 범위 내에 있는 지 체크)
             if(0 <= (a+1) && (a+1) < n){
-                if((d[a+1][b-1] == '0' || d[a+1][b-1] == 'E') && (d[a+1][b] == '0' || d[a+1][b] == 'E') && (d[a+1][b+1] == '0' || d[a+1][b+1] == 'E') && !visited[a+1][b][0]){//모두 빈칸이면 이동 가능!
+                if((save[a+1][b-1] == '0' || save[a+1][b-1] == 'E') && (save[a+1][b] == '0' || save[a+1][b] == 'E') && (save[a+1][b+1] == '0' || save[a+1][b+1] == 'E') && !visited[a+1][b][0]){//모두 빈칸이면 이동 가능!
                     visited[a+1][b][0] = 1;
                     q.push(make_pair(make_pair(a+1, b), make_pair(0, h+1)));
                 }
             }
             //L(좌) -->y값들을 -1씩 한다.(y값들만 범위 내에 있는 지 체크)
             if(0 <= (b-2) && (b-2) < n){
-                if((d[a][b-2] == '0' || d[a][b-2] == 'E') && !visited[a][b-1][0]){
+                if((save[a][b-2] == '0' || save[a][b-2] == 'E') && !visited[a][b-1][0]){
                     visited[a][b-1][0] = 1;
                     q.push(make_pair(make_pair(a, b-1), make_pair(0, h+1)));
                 }
             }
             //R(우) -->y값들을 +1씩 한다.(y값들만 범위 내에 있는 지 체크)
             if(0 <= (b+2) && (b+2) < n){
-                if((d[a][b+2] == '0' || d[a][b+2] == 'E') && !visited[a][b+1][0]){
+                if((save[a][b+2] == '0' || save[a][b+2] == 'E') && !visited[a][b+1][0]){
                     visited[a][b+1][0] = 1;
                     q.push(make_pair(make_pair(a, b+1), make_pair(0, h+1)));
                 }
@@ -71,7 +71,7 @@ void go(int x, int y, int dir, char d[][51], int num){//중간점을 항상 기�
                 int x = a + dx[i];
                 int y = b + dy[i];
                 if(0 <= x && x < n && 0 <= y && y < n){
-                    if(d[x][y] == '0' || d[x][y] == 'E'){
+                    if(save[x][y] == '0' || save[x][y] == 'E'){
                         temp++;
                     }
                 } 
@@ -83,28 +83,28 @@ void go(int x, int y, int dir, char d[][51], int num){//중간점을 항상 기�
         }else if(c == 1){//열
         //U(상)-->x값들을 -1씩 한다.(x값들만 범위 내에 있는 지 체크)
             if(0 <= (a-2) && (a-2) < n){
-                if((d[a-2][b] == '0' || d[a-2][b] == 'E') && !visited[a-1][b][1]){//모두 빈칸이면 이동 가능!
+                if((save[a-2][b] == '0' || save[a-2][b] == 'E') && !visited[a-1][b][1]){//모두 빈칸이면 이동 가능!
                     visited[a-1][b][1] = 1;
                     q.push(make_pair(make_pair(a-1, b), make_pair(1, h+1)));
                 }
             }
             //D(하)-->x값들을 +1씩 한다.(x값들만 범위 내에 있는 지 체크)
             if(0 <= (a+2) && (a+2) < n){
-                if((d[a+2][b] == '0' || d[a+2][b] == 'E') && !visited[a+1][b][1]){//모두 빈칸이면 이동 가능!
+                if((save[a+2][b] == '0' || save[a+2][b] == 'E') && !visited[a+1][b][1]){//모두 빈칸이면 이동 가능!
                     visited[a+1][b][1] = 1;
                     q.push(make_pair(make_pair(a+1, b), make_pair(1, h+1)));
                 }
             }
             //L(좌) -->y값들을 -1씩 한다.(y값들만 범위 내에 있는 지 체크)
             if(0 <= (b-1) && (b-1) < n){
-                if((d[a-1][b-1] == '0' || d[a-1][b-1] == 'E') && (d[a][b-1] == '0' || d[a][b-1] == 'E') && (d[a+1][b-1] == '0' || d[a+1][b-1] == 'E') && !visited[a][b-1][1]){
+                if((save[a-1][b-1] == '0' || save[a-1][b-1] == 'E') && (save[a][b-1] == '0' || save[a][b-1] == 'E') && (save[a+1][b-1] == '0' || save[a+1][b-1] == 'E') && !visited[a][b-1][1]){
                     visited[a][b-1][1] = 1;
                     q.push(make_pair(make_pair(a, b-1), make_pair(1, h+1)));
                 }
             }
             //R(우) -->y값들을 +1씩 한다.(y값들만 범위 내에 있는 지 체크)
             if(0 <= (b+1) && (b+1) < n){
-                if((d[a-1][b+1] == '0' || d[a-1][b+1] == 'E') && (d[a][b+1] == '0' || d[a][b+1] == 'E') && (d[a+1][b+1] == '0' || d[a+1][b+1] == 'E') && !visited[a][b+1][1]){
+                if((save[a-1][b+1] == '0' || save[a-1][b+1] == 'E') && (save[a][b+1] == '0' || save[a][b+1] == 'E') && (save[a+1][b+1] == '0' || save[a+1][b+1] == 'E') && !visited[a][b+1][1]){
                     visited[a][b+1][1] = 1;
                     q.push(make_pair(make_pair(a, b+1), make_pair(1, h+1)));
                 }
@@ -115,7 +115,7 @@ void go(int x, int y, int dir, char d[][51], int num){//중간점을 항상 기�
                 int x = a + dx[i];
                 int y = b + dy[i];
                 if(0 <= x && x < n && 0 <= y && y < n){
-                    if(d[x][y] == '0' || d[x][y] == 'E'){
+                    if(save[x][y] == '0' || save[x][y] == 'E'){
                         temp++;
                     }
                 } 
@@ -125,7 +125,6 @@ void go(int x, int y, int dir, char d[][51], int num){//중간점을 항상 기�
                 q.push(make_pair(make_pair(a, b), make_pair(0, h+1)));
             }
         }
-        
     }
 }
 
@@ -155,10 +154,10 @@ int main(){
     }
     if(start[0].second == start[1].second){//열의 값이 같으면 --> dir 1
         visited[start[1].first][start[1].second][1] = 1;
-        go(start[1].first, start[1].second, 1, save, 0);
+        go(start[1].first, start[1].second, 1, 0);
     }else{
         visited[start[1].first][start[1].second][0] = 1;
-        go(start[1].first, start[1].second, 0, save, 0);
+        go(start[1].first, start[1].second, 0, 0);
     }
     
     if(final_num == INT_MAX){//이동 불가
