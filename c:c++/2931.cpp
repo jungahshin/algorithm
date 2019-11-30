@@ -93,14 +93,6 @@ void find(){
             }
         }
     }
-    //test
-    // for(int i=0; i<v.size(); i++){
-    //     cout<<v[i].first<<"/"<<v[i].second<<"\n";
-    //     for(int j=0; j<gas_dir[(v[i].first)][(v[i].second)].size(); j++){
-    //         cout<<gas_dir[(v[i].first)][(v[i].second)][j]<<" ";
-    //     }
-    //     cout<<"\n";
-    // }
     check();
 }
 
