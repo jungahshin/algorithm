@@ -1,4 +1,5 @@
 //퍼즐-->최단은 무조건!!!bfs
+//visited대신 set사용!!!
 #include <iostream>
 #include <algorithm>
 #include <climits>
