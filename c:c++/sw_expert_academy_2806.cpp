@@ -11,11 +11,9 @@ int col[11] = {0, };//열
 int total;
 int line_1[20] = {0, };//왼쪽 대각선(sum)
 int line_2[20] = {0, };//오른쪽 대각선(x, y)가 있으면 8-y+x
-int visited[11][21] = {0, };//total(n), h(대각선)
 
 //dfs
 void go(int n, int total, int h){
-    // cout<<"n"<<n<<"total"<<total<<"h"<<h<<"\n";
     if(n == total){//대각선에 있는 애들이 n이되면 경우의 수 num++
         num++;
         return;
