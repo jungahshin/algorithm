@@ -42,7 +42,6 @@ int (*move(int a_[][21], int dir))[21]{
                         num = 0;
                     }                
                 }
-
             }
         }
     }
