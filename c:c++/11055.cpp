@@ -22,7 +22,9 @@ int main(){
             }
         }
         DP[i] = temp+a[i];
-        final = max(DP[i], final);
     }    
+    for(int i=1; i<=n; i++){
+        final = max(final, DP[i]);
+    }
     cout<<final<<"\n";
 }
