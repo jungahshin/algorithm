@@ -11,10 +11,7 @@ vector<string> words_final;
 bool check_final = false;
 
 void check(int size, string temp, string target, int num){
-    // cout<<"temp"<<temp<<"\n";
-    // cout<<"num"<<num<<"\n";
     if(temp == target){
-        // cout<<"in"<<temp<<"\n";
         final = min(final, num);
         check_final = true;
         return;
