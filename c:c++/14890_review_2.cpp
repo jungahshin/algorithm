@@ -30,7 +30,7 @@ void go(){
                 }
             }else if((map[i][j]-map[i][j+1]) == -1){//올라감
                 int num_1 = 0;
-                for(int k=j; k>j-l; k--){
+                for(int k=j+1-l; k<=j; k++){
                     if(k>=0 && k<=n-1){
                         if(map[i][j] == map[i][k] && !visited[k]){
                             visited[k] = 1;
@@ -70,7 +70,7 @@ void go(){
                 }
             }else if((map[j][i]-map[j+1][i]) == -1){//올라감
                 int num_1 = 0;
-                for(int k=j; k>j-l; k--){
+                for(int k=j+1-l; k<=j; k++){
                     if(k>=0 && k<=n-1){
                         if(map[j][i] == map[k][i] && !visited[k]){
                             visited[k] = 1;
