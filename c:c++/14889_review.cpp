@@ -8,26 +8,26 @@ using namespace std;
 int n;
 int a[21][21] = {0, };
 int visited[21] = {0, };
-int visited_[21] = {0, };
-int visited_1[21] = {0, };
-int final = 0;
-int final_ = 0;
-vector<int> v;
-vector<int> v_;
-vector<int> v_final;
-vector<int> v_final_;
+int start[21] = {0, };
+int link[21] = {0, };
+int start_final = 0;
+int link_final = 0;
+vector<int> start_v;
+vector<int> link_v;
+vector<int> start_v_final;
+vector<int> link_v_final;
 int real_final = INT_MAX;
 //인원수는 무조건 n/2로 나눠야 한다.
 
 void cal_2(){
-    v_final.clear();
+    start_v_final.clear();
     for(int i=0; i<n; i++){
-        if(visited_[i] == true){
-            v_final.push_back(i);
+        if(start[i] == true){
+            start_v_final.push_back(i);
         }
     }
-    final += a[(v_final[0])][(v_final[1])];
-    final += a[(v_final[1])][(v_final[0])];
+    start_final += a[(start_v_final[0])][(start_v_final[1])];
+    start_final += a[(start_v_final[1])][(start_v_final[0])];
 }
 
 void go_2(int num, int idx){//n/2중에서 2개를 뽑는다.
@@ -36,24 +36,24 @@ void go_2(int num, int idx){//n/2중에서 2개를 뽑는다.
         return;
     }
 
-    for(int i=idx; i<v.size(); i++){
-        if(visited_[v[i]] == true) continue;
-        visited_[v[i]] = true;
+    for(int i=idx; i<start_v.size(); i++){
+        if(start[start_v[i]] == true) continue;
+        start[start_v[i]] = true;
 
         go_2(num+1, i);
-        visited_[v[i]] = false;
+        start[start_v[i]] = false;
     }
 }
 
 void cal_3(){
-    v_final_.clear();
+    link_v_final.clear();
     for(int i=0; i<n; i++){
-        if(visited_1[i] == true){
-            v_final_.push_back(i);
+        if(link[i] == true){
+            link_v_final.push_back(i);
         }
     }
-    final_ += a[(v_final_[0])][(v_final_[1])];
-    final_ += a[(v_final_[1])][(v_final_[0])];
+    link_final += a[(link_v_final[0])][(link_v_final[1])];
+    link_final += a[(link_v_final[1])][(link_v_final[0])];
 }
 
 void go_3(int num, int idx){
@@ -62,32 +62,32 @@ void go_3(int num, int idx){
         return;
     }
 
-    for(int i=idx; i<v_.size(); i++){
-        if(visited_1[v_[i]] == true) continue;
-        visited_1[v_[i]] = true;
+    for(int i=idx; i<link_v.size(); i++){
+        if(link[link_v[i]] == true) continue;
+        link[link_v[i]] = true;
 
         go_3(num+1, i);
-        visited_1[v_[i]] = false;
+        link[link_v[i]] = false;
     }
 }
 
 void cal(){
-    v.clear();
-    v_.clear();
+    start_v.clear();
+    link_v.clear();
     for(int i=0; i<n; i++){
         if(visited[i] == true){//스타트팀
-            v.push_back(i);
+            start_v.push_back(i);
         }else{
-            v_.push_back(i);
+            link_v.push_back(i);
         }
     }
-    memset(visited_1, 0, sizeof(visited_1));
-    final_ = 0;
+    memset(link, 0, sizeof(link));
+    link_final = 0;
     go_3(0, 0);
-    memset(visited_, 0, sizeof(visited_));
-    final = 0;
+    memset(start, 0, sizeof(start));
+    start_final = 0;
     go_2(0, 0);
-    real_final = min(abs(final-final_), real_final);
+    real_final = min(abs(start_final-link_final), real_final);
 }
 
 void go(int num, int idx){
