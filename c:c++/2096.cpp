@@ -53,5 +53,6 @@ int main(){
             }
         }
     }
+    
     cout<<final_max<<" "<<final_min<<"\n";
 }
