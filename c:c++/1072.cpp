@@ -18,7 +18,7 @@ int main(){
     }
     while(low<=high){
         long long mid = (low+high)/2;
-        //mid가 승률을 좌지우지 하는 중요한 변수
+        //mid는 그저 이분탐색을 위한 수단일뿐...!
         z = (y+mid)*100/(x+mid);//소수점 버린다.
         if(temp<z){
             high = mid-1;
