@@ -7,7 +7,6 @@ long long x, y;
 
 int main(){
     cin>>x>>y;
-    long long num = 0;//게임을 한 횟수
     long long temp = (y*100)/x;//현재의 승률
 
     long long low = 0;
