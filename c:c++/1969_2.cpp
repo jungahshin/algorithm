@@ -1,14 +1,14 @@
 //DNA(map 이용)
 #include <iostream>
 #include <vector>
-#include <cstring>
+#include <map>
 #include <algorithm>
 using namespace std;
 
 int n, m;
 string s;
 char map_[1001][51];
-int alphabet[4] = {0, };
+map<char, int> alphabet;
 vector<pair<int, char>> v;
 string final;
 
@@ -31,23 +31,27 @@ int main(){
 
     //열을 기준으로 가장 자주 나오는 알파벳을 선정
     for(int i=0; i<m; i++){//열
-        memset(alphabet, 0, sizeof(alphabet));
+        alphabet.clear();
+        alphabet['A'] = 0;
+        alphabet['T'] = 0;
+        alphabet['G'] = 0;
+        alphabet['C'] = 0;
         for(int j=0; j<n; j++){//행
             if(map_[j][i] == 'A'){
-                alphabet[0]++;
+                alphabet['A']++;
             }else if(map_[j][i] == 'T'){
-                alphabet[1]++;
+                alphabet['T']++;
             }else if(map_[j][i] == 'G'){
-                alphabet[2]++;
+                alphabet['G']++;
             }else if(map_[j][i] == 'C'){
-                alphabet[3]++;
+                alphabet['C']++;
             }
         }
         v.clear();
-        v.push_back(make_pair(alphabet[0], 'A'));
-        v.push_back(make_pair(alphabet[1], 'T'));
-        v.push_back(make_pair(alphabet[2], 'G'));
-        v.push_back(make_pair(alphabet[3], 'C'));
+        v.push_back(make_pair(alphabet['A'], 'A'));
+        v.push_back(make_pair(alphabet['T'], 'T'));
+        v.push_back(make_pair(alphabet['G'], 'G'));
+        v.push_back(make_pair(alphabet['C'], 'C'));
         sort(v.begin(), v.end(), compare);
         final += v[v.size()-1].second;//가장 많은 수 & 알파벳 순 앞
     }
