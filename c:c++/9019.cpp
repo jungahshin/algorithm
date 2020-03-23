@@ -25,14 +25,12 @@ void go(int start, int end){
 
         //D
         if(x*2>9999){
-            // cout<<"D"<<"1"<<"\n";
             int temp_d = x*2%10000;
             if(!visited[temp_d]){
                 visited[temp_d] = 1;
                 q.push(make_pair(temp_d, num+"D"));
             }
         }else{
-            // cout<<"D"<<"2"<<"\n";
             int temp_d = x*2;
             if(!visited[temp_d]){
                 visited[temp_d] = 1;
@@ -41,14 +39,12 @@ void go(int start, int end){
         }
         //S
         if(x==0){
-            // cout<<"S"<<"1"<<"\n";
             int temp_s = 9999;
             if(!visited[temp_s]){
                 visited[temp_s] = 1;
                 q.push(make_pair(temp_s, num+"S"));
             }
         }else{
-            // cout<<"S"<<"2"<<"\n";
             int temp_s = x-1;
             if(!visited[temp_s]){
                 visited[temp_s] = 1;
