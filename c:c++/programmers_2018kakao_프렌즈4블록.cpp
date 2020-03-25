@@ -36,9 +36,6 @@ int main(){
                 num++;
             }
         }
-        int x = 0;
-        int y = 0;
-        bool check = false;
         for(int i=0; i<n; i++){//열을 기준으로
             vector<pair<int, int>> temp;
             for(int j=m-1; j>=0; j--){
