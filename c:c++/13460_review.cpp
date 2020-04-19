@@ -1,4 +1,4 @@
-//구슬 탈출
+//구슬 탈출2
 #include <iostream>
 #include <vector>
 #include <queue>
