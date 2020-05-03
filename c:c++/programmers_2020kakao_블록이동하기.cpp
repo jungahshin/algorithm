@@ -30,7 +30,6 @@ int solution(vector<vector<int>> board) {
         q.pop();
         
         if(dir == 0){//세로
-            //그냥 이동
             int sx = x+1;
             int sy = y;
             
@@ -39,6 +38,7 @@ int solution(vector<vector<int>> board) {
                 break;
             }
             
+            //그냥 이동
             for(int i=0; i<4; i++){
                 int nx = x+dx[i];
                 int ny = y+dy[i];
@@ -94,7 +94,6 @@ int solution(vector<vector<int>> board) {
                 }                
             }
         }else if(dir == 1){//가로
-            //그냥 이동
             int sx = x;
             int sy = y+1;
             
@@ -103,6 +102,7 @@ int solution(vector<vector<int>> board) {
                 break;
             }
             
+            //그냥 이동
             for(int i=0; i<4; i++){
                 int nx = x+dx[i];
                 int ny = y+dy[i];
