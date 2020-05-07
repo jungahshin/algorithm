@@ -31,7 +31,7 @@ void go(vector<int> weak, vector<int> dist, int Friend){//지금까지 투입된
         if(isfriend[i] == 0){
             isfriend[i] = 1;
             for(int j=0; j<weak.size(); j++){
-                if(iscovered[j] == 0){
+                if(iscovered[j] == 0){//아직 커버되지 않은 부분에서 커버 가능한 부분까지 커버.
                     int idx = j;
                     while(1){
                         if(idx>weak.size()-1){
