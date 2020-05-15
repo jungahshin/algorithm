@@ -7,7 +7,7 @@ string s;
 char bread[10001][501];
 int visited[10001][501] = {0, };
 int final = 0;
-int dx[3] = {-1, 0, 1};
+int dx[3] = {-1, 0, 1};//맨 위부터 진행한다->즉, 맨위부터 해서 맨 오른쪽 열에 도착하면 return해서 아래 애들한테 더 많은 기회를 주도록
 int dy[3] = {1, 1, 1};
 
 bool dfs(int x, int y, int num){//열마다 진행하기
@@ -26,6 +26,7 @@ bool dfs(int x, int y, int num){//열마다 진행하기
             }
         }
     }
+    
     return false;
 }
 
