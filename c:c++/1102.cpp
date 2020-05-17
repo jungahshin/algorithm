@@ -1,5 +1,6 @@
 //발전소
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 int n, p;
@@ -14,8 +15,6 @@ int fix(int bit_temp, int num_temp, int idx){
     if(DP[bit_temp][idx] != -1){
         return DP[bit_temp][idx];
     }
-
-    cout<<"bit"<<bit_temp<<"num"<<num_temp<<"idx"<<idx<<"\n";
 
     if(num_temp == p){
         //최소비용구하기
@@ -53,9 +52,8 @@ int main(){
             num++;
         }
     }
-    cout<<"bit"<<bit<<"\n";
     cin>>p;
-    if(p == 0){
+    if(p == 0 || p<=num){
         total = 0;
         cout<<total<<"\n";
         return 0;
