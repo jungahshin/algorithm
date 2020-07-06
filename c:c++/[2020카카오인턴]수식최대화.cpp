@@ -28,7 +28,10 @@ long long cal(long long a, long long b, char c)
    return num;
 }
  
-long long solution(string s) {
+int main()
+{
+   cin>>s;
+   //연산자의 종류를 파악한다.
    map<char, int> m;
    int kind = 1;
    string temp;
@@ -52,18 +55,12 @@ long long solution(string s) {
    V.push_back(0);
    V.push_back(1);
    V.push_back(2);
-  
-   do{
-       vector<char> OP_temp;
-       for(int i=0; i<OP.size(); i++){
-           OP_temp.push_back(OP[i]);
-       }
-       vector<long long> NUM_temp;
-       for(int i=0; i<num.size(); i++){
-           NUM_temp.push_back(num[i]);
-       }
  
+   do{
+       auto OP_temp = OP;
+       auto NUM_temp = num;
        int idx = 0;
+      
        while(1){
            stack<char> op_temp;
            stack<long long> num_temp;
@@ -85,6 +82,7 @@ long long solution(string s) {
                    num_temp.pop();
                    char c = op_temp.top();
                    op_temp.pop();
+ 
  
                    long long final = cal(a, b, c);
                    num_temp.push(final);
@@ -112,11 +110,9 @@ long long solution(string s) {
                NUM_temp.push_back(v2[k]);
            }
        }
-       if(total<abs(NUM_temp[0])){
-           total = abs(NUM_temp[0]);
-       }
-       // total = max(total, abs(NUM_temp[0]));
+       total = max(total, abs(NUM_temp[0]));
    }while(next_permutation(V.begin(), V.end()));
-  
-   return total;
+ 
+   cout<<total<<"\n";
+   return 0;
 }
