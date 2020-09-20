@@ -1,4 +1,3 @@
-15644번.
 // 구슬 탈출3
 #include <iostream>
 #include <queue>
